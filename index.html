@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>prashna · asks first</title>
+  <meta name="description" content="A question-led learning companion for 11 to 14 year olds. Prashna asks first; you can ask it back.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="app.css">
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <a class="wordmark" href="./">prashna <em>asks</em></a>
+      <nav>
+        <button class="pill theme-toggle" id="theme" type="button" aria-label="toggle theme">theme</button>
+      </nav>
+    </header>
+
+    <main>
+      <div id="home">
+        <section class="section enter">
+          <h1>prashna asks <em>first</em></h1>
+          <p class="dek">pick something to wonder about. prashna asks you a question before it tells you anything, and you can ask it back whenever you like.</p>
+          <dl class="tally" aria-label="your questions">
+            <div><dt>questions you asked today</dt><dd class="mono" id="t-today">0</dd></div>
+            <div><dt>questions all time</dt><dd class="mono" id="t-total">0</dd></div>
+            <div><dt>curiosity streak</dt><dd class="mono" id="t-streak">0 days</dd></div>
+          </dl>
+          <p class="caption" id="t-note"></p>
+        </section>
+
+        <section class="section">
+          <p class="label">pick a topic <span class="count">3</span></p>
+          <div class="cards" id="topics"></div>
+        </section>
+
+        <section class="section" id="wonders-section">
+          <p class="label">wonder list <span class="count" id="w-count">0</span></p>
+          <p class="caption w-intro">questions prashna could not answer land here. take them to a teacher, a library book or a grown-up.</p>
+          <div id="wonders"></div>
+          <div class="row w-actions">
+            <button class="pill" id="copy-wonders" type="button">copy the list</button>
+          </div>
+        </section>
+
+        <section class="section">
+          <p class="label">for grown-ups</p>
+          <div class="prose">
+            <p>prashna is a scripted conversation, not an ai. every question, hint and answer was written ahead of time, and typed replies are read by simple keyword matching. it never grades a child's thinking; it answers with another question, a hint or a small experiment to try at home.</p>
+            <p>the tally counts questions your child asks, not answers. nothing leaves this device: the tally, streak and wonder list live only in this browser.</p>
+          </div>
+          <div class="row">
+            <button class="pill danger" id="reset" type="button">clear this device</button>
+          </div>
+        </section>
+      </div>
+
+      <div id="chat" hidden>
+        <section class="section chat-section">
+          <div class="chat-head row">
+            <button class="pill" id="back" type="button">&larr; topics</button>
+            <button class="pill" id="restart" type="button">start over</button>
+          </div>
+          <h2 id="chat-title"></h2>
+          <div class="panel chat-panel">
+            <div class="panel-title"><span>prashna</span><span class="meta" id="chat-meta">exchange 0</span></div>
+            <ol class="log" id="log" aria-live="polite"></ol>
+            <div class="reply">
+              <div class="opts" id="opts" role="group" aria-label="tap an answer"></div>
+              <form id="form" autocomplete="off">
+                <label for="say" id="say-label">or type your own thinking</label>
+                <div class="say-row">
+                  <input id="say" type="text" maxlength="240" placeholder="type what you think">
+                  <button class="pill primary" type="submit" id="send">say it</button>
+                </div>
+              </form>
+              <div class="samples" id="samples" hidden></div>
+              <div class="ask-row row">
+                <button class="pill ask-btn" id="ask" type="button" aria-pressed="false">ask prashna back</button>
+                <span class="caption" id="ask-note">every question you ask counts.</span>
+              </div>
+              <div class="end-row row" id="end-row" hidden>
+                <button class="pill" id="another" type="button">pick another topic</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <ol class="sitemap">
+        <li><a href="./">topics</a></li>
+        <li><a href="#wonders-section" id="to-wonders">wonder list</a></li>
+        <li><a href="README.md">readme</a></li>
+        <li><a href="ROADMAP.md">roadmap</a></li>
+        <li><a href="https://github.com/ananyapradhan02/prashna" target="_blank" rel="noopener">source</a></li>
+        <li><a href="https://github.com/ananyapradhan02" target="_blank" rel="noopener">morning build</a></li>
+      </ol>
+      <p class="colophon">set in newsreader, figtree and ibm plex mono. no analytics. © ananya pradhan</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('theme').addEventListener('click', function () {
+      var root = document.documentElement;
+      var dark = root.getAttribute('data-theme') === 'dark' ||
+        (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      var next = dark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  </script>
+</body>
+</html>
