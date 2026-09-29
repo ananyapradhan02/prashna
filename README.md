@@ -44,9 +44,14 @@ Hand over the phone with one line: "this asks you questions about the moon, plan
 - If they rarely tap "ask prashna back": the button is either hidden or the invitation is weak. Try making Prashna end every third line with "what would you ask me?"
 - Which of the three topics held attention longest decides the format of topic four.
 
+## contact
+
+- book a call: https://calendly.com/ananyapradhan/30min
+- write to ananya: ananyapradhan02@gmail.com
+
 ## status
 
-v0.1 · 29.09.26 · live prototype, scripted content, not yet tested with a child.
+v0.2 · 29.09.26 · live prototype, scripted content, not yet tested with a child. parents can book a call or write to Ananya from the footer.
 
 ## files
 
