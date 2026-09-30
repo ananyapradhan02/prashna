@@ -1,2 +1,3 @@
 - v0.1 · 29.09.26 · three scripted question-first topics, ask prashna back with a wonder list, questions tally and curiosity streak
 - v0.2 · 29.09.26 · parents can book a call (calendly) or write to ananya from the footer
+- v0.3 · 30.09.26 · voice in and voice out: a mic that fills the answer box, a language switch for eight indian locales, read-aloud (off by default), a plain privacy note by the mic

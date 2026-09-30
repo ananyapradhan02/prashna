@@ -55,6 +55,7 @@
           <div class="prose">
             <p>prashna is a scripted conversation, not an ai. every question, hint and answer was written ahead of time, and typed replies are read by simple keyword matching. it never grades a child's thinking; it answers with another question, a hint or a small experiment to try at home.</p>
             <p>the tally counts questions your child asks, not answers. nothing leaves this device: the tally, streak and wonder list live only in this browser.</p>
+            <p>the mic and read-aloud buttons use the browser's own speech tools. prashna keeps no audio, but some browsers (chrome, for one) send what the mic hears to their maker's servers to turn it into words. read-aloud stays off until someone turns it on. typing always works.</p>
           </div>
           <div class="row">
             <button class="pill danger" id="reset" type="button">clear this device</button>
@@ -78,9 +79,17 @@
                 <label for="say" id="say-label">or type your own thinking</label>
                 <div class="say-row">
                   <input id="say" type="text" maxlength="240" placeholder="type what you think">
+                  <button class="pill mic-btn" type="button" id="mic" aria-pressed="false" aria-label="answer with your voice">mic</button>
                   <button class="pill primary" type="submit" id="send">say it</button>
                 </div>
+                <p class="caption mic-note" id="mic-note" aria-live="polite"></p>
               </form>
+              <div class="voice-row" id="voice-row">
+                <label class="caption" for="voice-lang">mic and voice language</label>
+                <select id="voice-lang"></select>
+                <button class="pill" type="button" id="speak" aria-pressed="false">read aloud: off</button>
+                <p class="caption voice-note" id="speak-note">prashna talks in english for now. the language switch changes what the mic listens for and the voice that reads aloud.</p>
+              </div>
               <div class="samples" id="samples" hidden></div>
               <div class="ask-row row">
                 <button class="pill ask-btn" id="ask" type="button" aria-pressed="false">ask prashna back</button>
@@ -106,10 +115,11 @@
         <li><a href="https://github.com/ananyapradhan02/prashna" target="_blank" rel="noopener">source</a></li>
         <li><a href="https://ananyapradhan02.github.io/morning-build/" target="_blank" rel="noopener">morning build</a></li>
       </ol>
-      <p class="colophon">set in newsreader, figtree and ibm plex mono. no analytics. © ananya pradhan</p>
+      <p class="colophon">prashna v0.3 · <time datetime="2026-09-30">30.09.26</time> · set in newsreader, figtree and ibm plex mono. no analytics. © ananya pradhan</p>
     </footer>
   </div>
 
+  <script src="voice.js"></script>
   <script src="app.js"></script>
   <script>
     document.getElementById('theme').addEventListener('click', function () {

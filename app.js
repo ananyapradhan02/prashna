@@ -1,4 +1,4 @@
-/* prashna v0.1
+/* prashna v0.3
    A scripted, question-led dialogue. There is no AI here: every line below was
    written ahead of time, and typed replies are read by keyword matching.
    Prashna never judges an answer; it replies with a follow-up, a hint or an experiment.
@@ -670,6 +670,14 @@
   function node() { var s = session(); return TOPICS[cur.id].nodes[s.node]; }
   function push(w, t, m) { session().log.push({ w: w, t: t, m: m || "" }); }
 
+  // read prashna's new lines aloud when the child has turned read-aloud on (voice.js)
+  function voiceOut(from) {
+    if (!window.prashnaVoice) return;
+    var lines = [];
+    session().log.slice(from).forEach(function (x) { if (x.w === "p") lines.push(x.t); });
+    window.prashnaVoice.speak(lines);
+  }
+
   function openTopic(id, fresh) {
     cur = { id: id };
     var s = data.sessions[id];
@@ -683,9 +691,13 @@
     el.title.textContent = TOPICS[id].title;
     renderChat(true);
     window.scrollTo(0, 0);
+    var log = session().log, last = log.length - 1;
+    while (last > 0 && log[last].w !== "p") last--;
+    voiceOut(Math.max(last, 0));
   }
 
   function closeChat() {
+    if (window.prashnaVoice) window.prashnaVoice.quiet();
     cur = null;
     var first = el.home.querySelector(".enter");
     if (first) first.classList.remove("enter"); // one entrance per page, not per visit
@@ -807,7 +819,7 @@
       if (!m && hasAny(text, UNSURE) && !s.hinted) {
         s.hinted = true;
         push("p", "here's a hint. " + n.hint + " have another go, or tap one of the ideas below.");
-        save(); renderChat();
+        save(); renderChat(); voiceOut(firstNew);
         return;
       }
       if (m) {
@@ -821,6 +833,7 @@
     advance(go);
     save();
     renderChat();
+    voiceOut(firstNew);
   }
 
   function bankAnswer(raw) {
@@ -859,6 +872,7 @@
     }
     save();
     renderChat();
+    voiceOut(firstNew);
   }
 
   el.form.addEventListener("submit", function (e) {

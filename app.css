@@ -95,3 +95,17 @@ main { display: block; }
   .ask-row { flex-direction: column; align-items: stretch; }
   .ask-row .caption { text-align: center; }
 }
+
+/* voice (v0.3) */
+.mic-btn { flex: none; min-height: 44px; padding-inline: 1em; }
+.mic-note { margin: .4rem 0 0; max-width: 40rem; }
+.mic-note:empty { display: none; }
+.voice-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding-top: var(--s1); border-top: 1px dotted var(--rule-dotted); }
+.voice-row label { flex: none; }
+.voice-row select { flex: 0 1 auto; min-height: 44px; max-width: 100%; }
+.voice-row .pill { min-height: 44px; }
+.voice-note { width: 100%; margin: 0; max-width: 40rem; }
+@media (max-width: 520px) {
+  .voice-row label { width: 100%; }
+  .voice-row select { flex: 1 1 10rem; }
+}
